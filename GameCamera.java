@@ -5,92 +5,36 @@ import java.awt.event.KeyListener;
 import java.awt.geom.Point2D;
 
 public class GameCamera extends Frame {
-    double x;
-    double y;
+    Point2D tracking;
     @Override
     public void paint(Graphics g) {
         // gameplan
         /*
          *
          */
-
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 9; j++) {
-            g.setColor(Game.gameMap.getTile(this.getX()+i, this.getY()+j).material.color);
-            g.fillRect(32*i+(int)x, 32*j+(int)x,32,32);
-            g.setColor(Game.gameMap.getTile(this.getX()+i, this.getY()+j).material.outline);
-            g.drawRect(32*i+(int)x, 32*j+(int)y,32,32);
-            }
+        for (int i = 0; i < 15; i++) {
+            for (int j = 0; j < 15; j++) {
+                GameTile t = Game.gameMap.getTile(Game.player.x+i, Game.player.y+j);
+                //set color of background item
+            g.setColor(t.material.color);
+            int a = (((int)i*32));
+            int b = (((int)j*32));
+            int c = (int) (a+(Game.player.x*100)%32);
+            int d = (int) (b+(Game.player.y*100)%32);
+        g.fillRect(c, d, 32, 32);}
         }
-        
         setVisible(true);
 
     }
-    public static void update(){
+    public void update(){
         
+        repaint();
     }
-    GameCamera(){
-        KeyListener keyin = new KeyListener() {
-
-            @Override
-            public void keyTyped(KeyEvent e) {
-                switch (e.getKeyCode()) {
-                    case KeyEvent.VK_LEFT:
-                    Game.player.move(1,0);
-                        break;
-                    case KeyEvent.VK_RIGHT:
-                        Game.player.move(-1,0);
-                        break;
-                    case KeyEvent.VK_UP:
-                        Game.player.move(0,1);
-                        break;
-                    case KeyEvent.VK_DOWN:
-                        Game.player.move(0,-1);
-                        break;                
-                    default:
-                        break;
-                }
-            }
-
-            @Override
-            public void keyPressed(KeyEvent e) {
-                switch (e.getKeyCode()) {
-                    case KeyEvent.VK_LEFT:
-                        Game.player.move(-1,0);
-                        break;
-                    case KeyEvent.VK_RIGHT:
-                        Game.player.move(1,0);
-                        break;
-                    case KeyEvent.VK_UP:
-                        Game.player.move(0,1);
-                        break;
-                    case KeyEvent.VK_DOWN:
-                        Game.player.move(0,-1);
-                        break;                
-                    default:
-                        break;
-                }
-
-                // TODO Auto-generated method stub
-            }
-
-            @Override
-            public void keyReleased(KeyEvent e) {
-                
-                System.out.println(e.getKeyCode());
-
-                // TODO Auto-generated method stub
-            }
-            
-        };
-        this.addKeyListener(keyin);
-        moveCam(1, 4);
+    GameCamera(Player p){
+        tracking = p;
+        this.addKeyListener(p);
         setVisible(true);
         setBounds(200, 200, 200, 200);
     
-    }
-    void moveCam(int x,int y){
-        this.x = x;
-        this.y = y;
     }
 }

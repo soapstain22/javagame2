@@ -3,7 +3,9 @@ import java.util.UUID;
 
 public abstract class GameObject extends Point2D{
     double x;
-    double y;   
+    double y;
+    double xinertia;
+    double yinertia;
     void place(int x, int y){
         System.out.println("GameObject.place()");
         this.setLocation(x, y);
@@ -22,5 +24,19 @@ public abstract class GameObject extends Point2D{
         // TODO Auto-generated method stub
         this.x = x;
         this.y = y;
+    }
+    void move(int ax,int ay){
+        this.x += ax;
+        this.y += ay;
+    }
+    public void push(int ax, int ay){
+        xinertia += ax;
+        yinertia += ay;
+    }
+    void update(){
+        yinertia = yinertia/2;
+        xinertia = xinertia/2;
+        x += xinertia;
+        y += yinertia;
     }
 }
