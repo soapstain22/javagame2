@@ -2,22 +2,25 @@ import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Panel;
 import java.awt.geom.Point2D;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.time.Year;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
+import java.util.Scanner;
 
 public class GameMap {
     static ObjBst root;
-    static GameTile[][] map = new GameTile[256][256];
+    static GameTile[][] map;
     final public static int seed = 451679238;
     public boolean GenerateMap() {
         Random r = new Random(seed);
-        map = new GameTile[256][256];
+        map = new GameTile[512][512];
         System.out.println("GameMap.GenerateMap()");
         for (int i = 0; i < map.length; i++) {
             for (int j = 0; j < map[i].length; j++) {
-                
-                map[i][j] = new GameTile((int) r.nextInt(3));
+                map[i%map.length][j%map.length] = new GameTile((int) r.nextInt(3));
             }
         }
         return false;
@@ -26,35 +29,28 @@ public class GameMap {
         root.addObject(gameObject);
         System.out.println("GameMap.addObject()");
     }
-
-        Panel p = new Panel(null) {
-            @Override
-            public void paint(Graphics g) {
-                // gameplan
-                /*
-                 * 
-                 */
-                for (int i = 0; i < 9; i++) {
-                    for (int j = 0; j < 9; j++) {
-                    System.out.println(i);
-                    g.fillRect(32*i, 32*j,32,32);
-                    }
-                }
-                setVisible(true);
-                repaint();
-                super.paint(g);
-            }
-        };
     
     GameTile getTile(double d, double e) {
-        return map[(int) d][(int) e];
+        int truex = (int) (d%map.length);
+        int truey = (int) (e%map[0].length);
+        return map[truex][truey];
     }
     public static boolean isTilePassable(double d, double e) {
         return GameMap.map[(int)d][(int)e].open;
     }
 
     public void update() {
+
         Game.player.update();
-        
+    }
+    void mapRewrite(File f) throws FileNotFoundException{
+        Scanner s = new Scanner(f);
+        for (int i = 0; i < map.length; i++) {
+            for (int j = 0; j < map.length; j++) {
+                map[i][j] = new GameTile(s.nextInt());
+            }
+        }
+        s.nextInt()
+
     }
 }

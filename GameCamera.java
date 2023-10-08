@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Frame;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
@@ -17,17 +18,18 @@ public class GameCamera extends Frame {
                 GameTile t = Game.gameMap.getTile(Game.player.x+i, Game.player.y+j);
                 //set color of background item
             g.setColor(t.material.color);
-            int a = (((int)i*32));
-            int b = (((int)j*32));
-            int c = (int) (a+(Game.player.x*100)%32);
-            int d = (int) (b+(Game.player.y*100)%32);
+            int offsetx = (((int)i*32));
+            int offsety = (((int)j*32));
+            int c = (int) (offsetx-(Game.player.x*32)%32);
+            int d = (int) (offsety-(Game.player.y*32)%32);
         g.fillRect(c, d, 32, 32);}
         }
+        g.setColor(Color.black);
+        g.drawOval(64, 64, 32, 32);
         setVisible(true);
 
     }
     public void update(){
-        
         repaint();
     }
     GameCamera(Player p){

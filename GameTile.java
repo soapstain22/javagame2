@@ -3,7 +3,6 @@ import java.util.Map;
 public class GameTile {
     boolean open;
     short temperature = 293; //Boiling point of water is 373.15 K
-
     byte brightness;
     Material material;
     GameTile(int a){

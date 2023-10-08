@@ -34,8 +34,6 @@ public abstract class GameObject extends Point2D{
         yinertia += ay;
     }
     void update(){
-        yinertia = yinertia/2;
-        xinertia = xinertia/2;
         x += xinertia;
         y += yinertia;
     }

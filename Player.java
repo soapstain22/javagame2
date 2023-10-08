@@ -5,6 +5,7 @@ import java.util.Stack;
 public class Player extends GameObject implements KeyListener {
     boolean alive = true;
     int hp;
+    double speed = 0.01;
     KeyListener keyin;
 
     public void spawn(int i, int j) {
@@ -22,37 +23,24 @@ public class Player extends GameObject implements KeyListener {
         Game.gameCamera.repaint(1);
 
     }
-
-    public int push(double x, double y) {
-        this.x += x;
-        this.y += y;
-        this.setLocation(this.x + x, this.y + y);
-
-        if (x + y < 0.1) {
-            return 0;
-
-        }
-        return push(x / 2, y / 2);
-    }
-
     @Override
     public void keyPressed(KeyEvent e) {
 
         switch (e.getKeyCode()) {
             case KeyEvent.VK_LEFT:
-                xinertia -= 1;
+                xinertia = -speed;
                 System.out.println("lef");
                 break;
             case KeyEvent.VK_RIGHT:
-                xinertia += 1;
+                xinertia = speed;
                 System.out.println("rig");
-                break;
+                break;  
             case KeyEvent.VK_UP:
-                yinertia += 1;
+                yinertia = -speed;
                 System.out.println("up");
                 break;
             case KeyEvent.VK_DOWN:
-                yinertia -= 1;
+                yinertia = speed;
                 System.out.println("dow");
                 break;
             default:
@@ -64,9 +52,26 @@ public class Player extends GameObject implements KeyListener {
 
     @Override
     public void keyReleased(KeyEvent e) {
-        xinertia = 0;
-        yinertia = 0;
-        // TODO Auto-generated method stub
+        switch (e.getKeyCode()) {
+            case KeyEvent.VK_LEFT:
+                xinertia = 0;
+                System.out.println("lef");
+                break;
+            case KeyEvent.VK_RIGHT:
+                xinertia = 0;
+                System.out.println("rig");
+                break;  
+            case KeyEvent.VK_UP:
+                yinertia = 0;
+                System.out.println("up");
+                break;
+            case KeyEvent.VK_DOWN:
+                yinertia = 0;
+                System.out.println("dow");
+                break;
+            default:
+                break;
+        }
     }
 
     @Override
