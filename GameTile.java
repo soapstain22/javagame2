@@ -17,7 +17,20 @@ public class GameTile {
             case 2:
             this.material = Material.sand;
                 break;
-                
+            case 3:
+            this.material = Material.clay;
+
+            case 4:
+            this.material = Material.iron;
+
+            case 5:
+            this.material = Material.lava;
+
+            case 6:
+            this.material = Material.silt;
+
+            case 7:
+            this.material = Material.mud;
             default:
                 break;
         }

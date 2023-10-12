@@ -7,7 +7,56 @@ public abstract class Material {
     byte hardness;
     byte conductivity;
     byte density;
-
+        public static final Material loam = new Material() {
+        {
+            this.color = Color.getHSBColor(37, 100, 20);
+            this.outline = Color.getHSBColor(37, 100, 10);
+            this.hardness = 32;
+            this.conductivity = 32;
+            this.density = 32;
+            this.flammable = false;
+        }
+    };
+    public static final Material silt = new Material() {
+        {
+            this.color = Color.getHSBColor(37, 100, 20);
+            this.outline = Color.getHSBColor(37, 100, 10);
+            this.hardness = 32;
+            this.conductivity = 32;
+            this.density = 32;
+            this.flammable = false;
+        }
+    };
+    public static final Material clay = new Material() {
+        {
+            this.color = Color.getHSBColor(37, 100, 20);
+            this.outline = Color.getHSBColor(37, 100, 10);
+            this.hardness = 32;
+            this.conductivity = 32;
+            this.density = 32;
+            this.flammable = false;
+        }
+    };
+    public static final Material mud = new Material() {
+        {
+            this.color = Color.getHSBColor(37, 100, 20);
+            this.outline = Color.getHSBColor(37, 100, 10);
+            this.hardness = 32;
+            this.conductivity = 32;
+            this.density = 32;
+            this.flammable = false;
+        }
+    };
+    public static final Material lava = new Material() {
+        {
+            this.color = Color.getHSBColor(37, 100, 20);
+            this.outline = Color.getHSBColor(37, 100, 10);
+            this.hardness = 32;
+            this.conductivity = 32;
+            this.density = 32;
+            this.flammable = false;
+        }
+    };
     public static final Material dirt = new Material() {
         {
             this.color = Color.getHSBColor(37, 100, 20);
@@ -32,6 +81,16 @@ public abstract class Material {
         {
             this.color = Color.getHSBColor(0, 0, 71);
             this.outline = Color.getHSBColor(0, 0, 50);
+            this.hardness = 32;
+            this.conductivity = 32;
+            this.density = 32;
+            this.flammable = false;
+        }
+    };
+    public static final Material iron = new Material() {
+        {
+            this.color = Color.getHSBColor(37, 100, 20);
+            this.outline = Color.getHSBColor(37, 100, 10);
             this.hardness = 32;
             this.conductivity = 32;
             this.density = 32;

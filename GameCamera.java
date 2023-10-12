@@ -1,11 +1,13 @@
 import java.awt.Color;
 import java.awt.Frame;
 import java.awt.Graphics;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.awt.geom.Point2D;
+import java.awt.image.TileObserver;
+import java.awt.image.WritableRenderedImage;
+import java.util.HashMap;
 
-public class GameCamera extends Frame {
+public class GameCamera extends Frame{
+    GameObject[] visible;
     Point2D tracking;
     @Override
     public void paint(Graphics g) {
@@ -17,17 +19,20 @@ public class GameCamera extends Frame {
             for (int j = 0; j < 15; j++) {
                 GameTile t = Game.gameMap.getTile(Game.player.x+i, Game.player.y+j);
                 //set color of background item
-            g.setColor(t.material.color);
-            int offsetx = (((int)i*32));
-            int offsety = (((int)j*32));
-            int c = (int) (offsetx-(Game.player.x*32)%32);
-            int d = (int) (offsety-(Game.player.y*32)%32);
-        g.fillRect(c, d, 32, 32);}
+                g.setColor(t.material.color);
+                int offsetx = (((int)i*32));
+                int offsety = (((int)j*32));
+                int c = (int) (offsetx-(Game.player.x*32)%32);
+                int d = (int) (offsety-(Game.player.y*32)%32);
+                g.fillRect(c, d, 32, 32);
+                /*visible = wrangleNear(tracking, d, i);
+                for (int k = 0; k < visible.length; k++) {
+                    //g.drawImage(visible[k].getGameSprite(), offsetx, offsety, Game.gameCamera);
+                }
+                */
+            }
         }
-        g.setColor(Color.black);
-        g.drawOval(64, 64, 32, 32);
         setVisible(true);
-
     }
     public void update(){
         repaint();
@@ -38,5 +43,9 @@ public class GameCamera extends Frame {
         setVisible(true);
         setBounds(200, 200, 200, 200);
     
+    }
+    GameObject[] wrangleNear(Point2D Tracked, int range, int limit){
+        return visible;
+        //GameMap.map[][];
     }
 }

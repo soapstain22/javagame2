@@ -1,33 +1,22 @@
-import java.awt.Component;
-import java.awt.Graphics;
-import java.awt.Panel;
 import java.awt.geom.Point2D;
+import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.time.Year;
+import java.io.IOException;
+import java.util.Dictionary;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
-import java.util.Scanner;
+import java.util.TreeMap;
+
+import javax.imageio.ImageIO;
 
 public class GameMap {
-    static ObjBst root;
+    static TreeMap<GameObject,Point2D> t;
     static GameTile[][] map;
-    final public static int seed = 451679238;
-    public boolean GenerateMap() {
-        Random r = new Random(seed);
-        map = new GameTile[512][512];
-        System.out.println("GameMap.GenerateMap()");
-        for (int i = 0; i < map.length; i++) {
-            for (int j = 0; j < map[i].length; j++) {
-                map[i%map.length][j%map.length] = new GameTile((int) r.nextInt(3));
-            }
-        }
-        return false;
-    }
-    public void addObject(GameObject gameObject) {
-        root.addObject(gameObject);
-        System.out.println("GameMap.addObject()");
+    public static Dictionary<String,GameObject> g;
+    final public static long seed = 451679238;
+    public GameMap(int size, int seed) {
+        map = WorldGenerator.generate(size, seed);
     }
     
     GameTile getTile(double d, double e) {
@@ -43,14 +32,18 @@ public class GameMap {
 
         Game.player.update();
     }
-    void mapRewrite(File f) throws FileNotFoundException{
-        Scanner s = new Scanner(f);
-        for (int i = 0; i < map.length; i++) {
+    void mapRewrite(File f) throws IOException{
+        BufferedImage b = ImageIO.read(f);
+        for (int c = 0; c < map.length; c++) {
             for (int j = 0; j < map.length; j++) {
-                map[i][j] = new GameTile(s.nextInt());
+                map[c][j] = new GameTile(b.getRGB(c, j));
             }
         }
-        s.nextInt()
+    }
+    public int mapSize() {
+        return this.map.length;
+    }
 
+    public void addObject(GameObject gameObject) {
     }
 }

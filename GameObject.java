@@ -1,11 +1,18 @@
+import java.awt.Image;
 import java.awt.geom.Point2D;
-import java.util.UUID;
+import java.awt.image.BufferedImage;
 
 public abstract class GameObject extends Point2D{
     double x;
     double y;
     double xinertia;
     double yinertia;
+    GameSprite sprite;
+    public int direction;
+    public Image getGameSprite() {
+        return gameSprite.spriteUpdate(direction, (xinertia==0)&(yinertia==0));
+    }
+    GameSprite gameSprite;
     void place(int x, int y){
         System.out.println("GameObject.place()");
         this.setLocation(x, y);
@@ -14,7 +21,7 @@ public abstract class GameObject extends Point2D{
     @Override
     public double getX() {
         return this.x;
-        }
+    }
     @Override
     public double getY() {
         return this.y;
@@ -33,7 +40,8 @@ public abstract class GameObject extends Point2D{
         xinertia += ax;
         yinertia += ay;
     }
-    void update(){
+    synchronized void update(){
+         // dangerous
         x += xinertia;
         y += yinertia;
     }

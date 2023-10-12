@@ -1,5 +1,6 @@
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.image.BufferedImage;
 import java.util.Stack;
 
 public class Player extends GameObject implements KeyListener {
@@ -7,13 +8,14 @@ public class Player extends GameObject implements KeyListener {
     int hp;
     double speed = 0.01;
     KeyListener keyin;
-
+    GameSprite sprite;
     public void spawn(int i, int j) {
         this.setLocation(i, j);
     }
 
     Player(int x, int y) {
         super();
+        
         this.setLocation(x, y);
     }
 
@@ -79,4 +81,5 @@ public class Player extends GameObject implements KeyListener {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'keyTyped'");
     }
+
 }
