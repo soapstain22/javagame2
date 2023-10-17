@@ -6,7 +6,8 @@ import java.util.Stack;
 public class Player extends GameObject implements KeyListener {
     boolean alive = true;
     int hp;
-    double speed = 0.01;
+    double speed = 0.02;
+    private boolean moving = false;
     KeyListener keyin;
     GameSprite sprite;
     public void spawn(int i, int j) {

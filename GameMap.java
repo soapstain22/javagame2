@@ -13,15 +13,19 @@ import javax.imageio.ImageIO;
 public class GameMap {
     static TreeMap<GameObject,Point2D> t;
     static GameTile[][] map;
+    final int size;
+    static WorldGenerator wg;
     public static Dictionary<String,GameObject> g;
     final public static long seed = 451679238;
     public GameMap(int size, int seed) {
-        map = WorldGenerator.generate(size, seed);
+        this.size = size;
+        wg = new WorldGenerator(size,seed);
+        map = wg.generate(size, seed);
     }
     
     GameTile getTile(double d, double e) {
         int truex = (int) (d%map.length);
-        int truey = (int) (e%map[0].length);
+        int truey = (int) (e%map.length);
         return map[truex][truey];
     }
     public static boolean isTilePassable(double d, double e) {
@@ -32,18 +36,20 @@ public class GameMap {
 
         Game.player.update();
     }
-    void mapRewrite(File f) throws IOException{
+   /*  void mapRewrite(File f) throws IOException{
         BufferedImage b = ImageIO.read(f);
         for (int c = 0; c < map.length; c++) {
             for (int j = 0; j < map.length; j++) {
-                map[c][j] = new GameTile(b.getRGB(c, j));
+                //map[c][j] = new GameTile(b.getRGB(c, j));
             }
         }
     }
+    */
     public int mapSize() {
         return this.map.length;
     }
 
     public void addObject(GameObject gameObject) {
+        
     }
 }

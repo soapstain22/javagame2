@@ -17,7 +17,7 @@ public class GameSprite {
         return source.getSubimage((direction%maxWidth)*maxWidth,(cur%max)*maxHeight, maxWidth, maxHeight);
     }
     GameSprite(String file, int maxHeight, int maxWidth) throws IOException{
-        this.maxHeight = maxHeight;
+        this.maxHeight = maxHeight; //post hardcore
         this.maxWidth = maxWidth;
         //can only have 1,4,8 directions
         File f = new File(file);
@@ -27,5 +27,6 @@ public class GameSprite {
         source.getHeight();
 
     }
+    
 
 }

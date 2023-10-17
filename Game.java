@@ -18,7 +18,7 @@ public abstract class Game {
     boolean debug;
     public static void main(String[] args) {
         System.out.println("Game.main()");
-        Game.gameMap = new GameMap(30,4);
+        Game.gameMap = new GameMap(64,4);
         Game.player = new Player(10,10);
         gameCamera = new GameCamera(player);
         Game.Load(null);
@@ -27,8 +27,10 @@ public abstract class Game {
         Game.gameMap.update();
         Game.gameCamera.update();
         Game.player.update();
-        System.out.print("a");
-        }
+        System.out.printf("player|"+Game.player.y+"y %6s| ", Game.player.x+"x");
+        System.out.printf("dir:"+player.direction+" %5s| %n", Game.player.speed);
+
+    }
 };
 
 ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);

@@ -7,11 +7,10 @@ public abstract class GameObject extends Point2D{
     double y;
     double xinertia;
     double yinertia;
-    GameSprite sprite;
     public int direction;
-    public Image getGameSprite() {
-        return gameSprite.spriteUpdate(direction, (xinertia==0)&(yinertia==0));
-    }
+    final long uuid;
+    static long validKeys = 0;
+
     GameSprite gameSprite;
     void place(int x, int y){
         System.out.println("GameObject.place()");
@@ -31,6 +30,7 @@ public abstract class GameObject extends Point2D{
         // TODO Auto-generated method stub
         this.x = x;
         this.y = y;
+        GameMap.map[(int) x][(int) y].items
     }
     void move(int ax,int ay){
         this.x += ax;
@@ -40,9 +40,21 @@ public abstract class GameObject extends Point2D{
         xinertia += ax;
         yinertia += ay;
     }
+    public void push(int ax, int ay, boolean face){
+        xinertia += ax;
+        yinertia += ay;
+        direction = Direction.toInt(ax,ay);
+        
+    }
     synchronized void update(){
          // dangerous
         x += xinertia;
         y += yinertia;
+    }
+    GameObject(){
+        validKeys +=1; 
+        va
+        GameCache.track(uuid, );
+
     }
 }

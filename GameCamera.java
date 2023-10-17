@@ -25,6 +25,7 @@ public class GameCamera extends Frame{
                 int c = (int) (offsetx-(Game.player.x*32)%32);
                 int d = (int) (offsety-(Game.player.y*32)%32);
                 g.fillRect(c, d, 32, 32);
+                
                 /*visible = wrangleNear(tracking, d, i);
                 for (int k = 0; k < visible.length; k++) {
                     //g.drawImage(visible[k].getGameSprite(), offsetx, offsety, Game.gameCamera);
