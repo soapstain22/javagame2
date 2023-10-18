@@ -2,11 +2,14 @@ import java.awt.Color;
 import java.awt.Frame;
 import java.awt.Graphics;
 import java.awt.geom.Point2D;
+import java.awt.image.ImageConsumer;
 import java.awt.image.TileObserver;
 import java.awt.image.WritableRenderedImage;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedList;
 
-public class GameCamera extends Frame{
+public class GameCamera extends Frame {
     GameObject[] visible;
     Point2D tracking;
     @Override
@@ -25,13 +28,18 @@ public class GameCamera extends Frame{
                 int c = (int) (offsetx-(Game.player.x*32)%32);
                 int d = (int) (offsety-(Game.player.y*32)%32);
                 g.fillRect(c, d, 32, 32);
-                
+                g.setColor(t.getColor());
+                g.drawRect(c+1, d+1, 30, 30);
                 /*visible = wrangleNear(tracking, d, i);
                 for (int k = 0; k < visible.length; k++) {
                     //g.drawImage(visible[k].getGameSprite(), offsetx, offsety, Game.gameCamera);
                 }
                 */
             }
+        }
+        for (int k = 0; k < GameCache.drawing.size(); k++) {
+            GameCache.drawing.get(k);
+            g.drawImage(Game.player.draw(),2,2,this);
         }
         setVisible(true);
     }

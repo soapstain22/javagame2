@@ -1,6 +1,8 @@
 
 import java.awt.*;
 import java.awt.event.KeyListener;
+import java.awt.geom.Point2D;
+import java.util.PriorityQueue;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -14,13 +16,12 @@ public abstract class Game {
     public static Player player;
     public static GameCamera gameCamera;
     public static KeyListener k;
-    
     boolean debug;
     public static void main(String[] args) {
         System.out.println("Game.main()");
         Game.gameMap = new GameMap(64,4);
         Game.player = new Player(10,10);
-        gameCamera = new GameCamera(player);
+        Game.gameCamera = new GameCamera(player);
         Game.Load(null);
         Runnable tick = new Runnable() {
     public void run() {

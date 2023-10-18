@@ -1,8 +1,10 @@
 import java.awt.Image;
 import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.util.Comparator;
 
-public abstract class GameObject extends Point2D{
+public abstract class GameObject extends Point2D implements Comparator<Point2D>{
     double x;
     double y;
     double xinertia;
@@ -10,8 +12,7 @@ public abstract class GameObject extends Point2D{
     public int direction;
     final long uuid;
     static long validKeys = 0;
-
-    GameSprite gameSprite;
+    private GameSprite gameSprite;
     void place(int x, int y){
         System.out.println("GameObject.place()");
         this.setLocation(x, y);
@@ -30,9 +31,10 @@ public abstract class GameObject extends Point2D{
         // TODO Auto-generated method stub
         this.x = x;
         this.y = y;
-        GameMap.map[(int) x][(int) y].items
+        //GameMap.map[(int) x][(int) y];
     }
     void move(int ax,int ay){
+        
         this.x += ax;
         this.y += ay;
     }
@@ -52,9 +54,17 @@ public abstract class GameObject extends Point2D{
         y += yinertia;
     }
     GameObject(){
+        uuid = validKeys;
         validKeys +=1; 
-        va
-        GameCache.track(uuid, );
+        //GameCache.track(this);
+        try {
+            gameSprite = new GameSprite("/Users/maxzed/Documents/GitHub/javagame2/Resources/PANTS.PNG");
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
 
     }
+
+    
 }
